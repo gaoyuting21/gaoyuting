@@ -160,7 +160,7 @@ class ConvRNN2D(RNN):
                                          array_ops.zeros(tuple(shape)),
                                          padding=self.cell.padding)
     ##########################################################################
-    shape_c = list(self.cell.cov_kernel_shape)
+    shape_c = list(self.cell.recurrent_kernel_shape_c)
     shape_c[-1] = self.cell.filters
     initial_state = self.cell.input_conv(initial_state_1,
                                        array_ops.zeros(tuple(shape_c)),
@@ -448,12 +448,11 @@ class ConvLSTM2DCell_2(DropoutRNNCellMixin, Layer):
     ################
     #print ('input dim',input_dim)
     #print('channel_axis',channel_axis)
-    cov_kernel_shape = self.cov_kernel_size+(input_dim, self.filters * 4)
+    cov_kernel_shape = self.cov_kernel_size+(self.filters, self.filters * 4)
     self.cov_kernel_shape = cov_kernel_shape
     #print ('cov_kernel_shape',self.cov_kernel_shape)
     ##################
-    r_kernel = (5,1)
-    self.r_kernel = r_kernel
+
     recurrent_kernel_shape = self.kernel_size + (self.filters, self.filters * 4)
     #############################################
     recurrent_kernel_shape_c = self.cov_kernel_size + (self.filters, self.filters * 5)
