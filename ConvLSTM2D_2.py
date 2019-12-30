@@ -510,6 +510,7 @@ class ConvLSTM2DCell_2(DropoutRNNCellMixin, Layer):
   def call(self, inputs, states, training=None):
     h_tm1 = states[0]  # previous memory state
     c_tm1 = states[1]  # previous carry state
+
     ############################################
     c_shape = c_tm1.get_shape().as_list()
     c_shape

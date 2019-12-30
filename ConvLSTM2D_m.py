@@ -504,6 +504,7 @@ class ConvLSTM2DCell_2(DropoutRNNCellMixin, Layer):
   def call(self, inputs, states, training=None):
     h_tm1 = states[0]  # previous memory state
     c_tm1 = states[1]  # previous carry state
+    print('lstm',inputs.shape)
 
     dp_mask = self.get_dropout_mask_for_cell(inputs, training, count=4)
     # dropout matrices for recurrent units
